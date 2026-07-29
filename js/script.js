@@ -3,6 +3,7 @@
 
   document.documentElement.classList.add("js");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const fastMobile = window.matchMedia("(max-width: 900px), (pointer: coarse)");
   const body = document.body;
   body.classList.add("is-loading");
   const $ = (selector, scope = document) => scope.querySelector(selector);
@@ -16,13 +17,23 @@
     window.setTimeout(() => preloader.remove(), 800);
   };
   $("[data-skip-intro]")?.addEventListener("click", dismissIntro);
-  window.addEventListener("load", () => window.setTimeout(dismissIntro, reduceMotion.matches ? 0 : 1900));
+  if (reduceMotion.matches || fastMobile.matches) {
+    dismissIntro();
+  } else {
+    window.addEventListener("load", () => window.setTimeout(dismissIntro, 1900));
+  }
   window.setTimeout(dismissIntro, 3200);
 
   const header = $("[data-header]");
-  const updateHeader = () => header?.classList.toggle("is-scrolled", window.scrollY > 32);
+  let headerFrame = 0;
+  const updateHeader = () => {
+    header?.classList.toggle("is-scrolled", window.scrollY > 32);
+    headerFrame = 0;
+  };
   updateHeader();
-  window.addEventListener("scroll", updateHeader, { passive: true });
+  window.addEventListener("scroll", () => {
+    if (!headerFrame) headerFrame = window.requestAnimationFrame(updateHeader);
+  }, { passive: true });
 
   const menuButton = $(".menu-toggle");
   const nav = $("#site-nav");
@@ -42,7 +53,7 @@
   });
 
   const reveals = $$(".reveal");
-  if ("IntersectionObserver" in window && !reduceMotion.matches) {
+  if ("IntersectionObserver" in window && !reduceMotion.matches && !fastMobile.matches) {
     const observer = new IntersectionObserver((entries, instance) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -93,7 +104,7 @@
     $(".world-stage__copy span", stage).textContent = data.items;
     $(".world-card--a small", stage).textContent = data.small;
     $(".world-card--a strong", stage).innerHTML = data.label;
-    if (!reduceMotion.matches) {
+    if (!reduceMotion.matches && !fastMobile.matches) {
       stage.animate([{ opacity: .55, transform: "scale(.99)" }, { opacity: 1, transform: "scale(1)" }], { duration: 500, easing: "cubic-bezier(.22,1,.36,1)" });
     }
   });

@@ -10,6 +10,7 @@ body {
   font-size: 1rem;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  touch-action: pan-y;
 }
 body.is-loading { overflow: hidden; }
 img { display: block; max-width: 100%; }
@@ -325,3 +326,17 @@ button { cursor: pointer; }
 .footer-wordmark i { color:var(--gold); font-size:.45em; font-weight:400; }
 .footer__bottom { display:flex; justify-content:space-between; gap:1rem; padding-top:1.4rem; border-top:1px solid #302631; color:#756a77; font-size:.59rem; letter-spacing:.12em; text-transform:uppercase; }
 .footer__bottom button { padding:0; border:0; color:var(--gold-light); background:none; text-transform:inherit; letter-spacing:inherit; }
+
+/* Rendering performance */
+@supports (content-visibility: auto) {
+  main > .section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
+  }
+}
+.product-art,
+.project-window,
+.world-stage,
+.founder__frame {
+  contain: layout paint;
+}
