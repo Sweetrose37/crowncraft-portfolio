@@ -72,14 +72,17 @@
   .site-header { min-height:4.6rem; }
   .brand { font-size:.95rem; }
   .brand img { width:2.1rem; height:2.1rem; }
-  .hero { min-height:50rem; align-content:start; padding-top:9.5rem; }
-  .hero h1 { font-size:clamp(4.25rem,21vw,6.8rem); }
-  .hero h1 em { margin-left:.5rem; }
-  .hero-stage { right:-28%; bottom:7%; width:95vw; opacity:.45; }
-  .hero__lede { max-width:27rem; font-size:1rem; }
+  .site-nav { justify-content:flex-start; overflow-y:auto; padding-top:5.75rem; padding-bottom:2rem; }
+  .site-nav > a { font-size:clamp(1.45rem,7vw,1.8rem); }
+  .hero { display:block; min-height:auto; padding-top:8.5rem; padding-bottom:5rem; }
+  .hero__copy { width:100%; }
+  .hero h1 { max-width:100%; font-size:clamp(2.8rem,14vw,4.5rem); line-height:.82; letter-spacing:-.055em; }
+  .hero h1 em { margin-left:clamp(.25rem,3vw,1rem); }
+  .hero-stage { position:relative; right:auto; bottom:auto; width:min(100%,28rem); margin:3.25rem auto 0; opacity:.82; perspective:none; }
+  .hero__lede { max-width:27rem; margin:1.75rem 0 2rem; font-size:1rem; line-height:1.65; }
   .scroll-cue { display:none; }
   .section-kicker { margin-bottom:2.4rem; }
-  .display { font-size:clamp(3.2rem,14vw,5rem); }
+  .display { max-width:100%; font-size:clamp(2.65rem,12vw,4.25rem); line-height:.98; overflow-wrap:normal; }
   .manifesto__grid { gap:3rem; }
   .marquee { margin-top:5rem; }
   .section-head { margin-bottom:3rem; }
@@ -126,7 +129,6 @@
   .footer-wordmark i { display:block; margin-left:36%; }
   .footer__bottom { display:grid; gap:.8rem; }
   .footer__bottom button { justify-self:start; }
-  .hero-stage { perspective:none; }
   .orbit--two { display:none; }
   .values-orbit { contain:layout paint; }
   .founder__frame::before { inset:1rem -.65rem -.65rem 1rem; }
@@ -151,12 +153,31 @@
 }
 
 @media (max-width: 420px) {
-  .button-row { display:grid; }
+  :root { --pad:1rem; }
+  .button-row { display:grid; width:100%; }
   .button-row .button { width:100%; }
-  .hero-stage { bottom:9%; }
+  .hero { padding-top:7.75rem; }
+  .hero h1 { font-size:clamp(2.7rem,14vw,3.7rem); }
+  .hero-stage { bottom:auto; width:100%; margin-top:2.75rem; }
+  .hero__lede { margin-top:1.5rem; }
   .service-item button strong { font-size:1.25rem; }
   .project-window__top small { display:none; }
   .world-tabs { margin-inline:-1.25rem; padding-left:1.25rem; }
   .world-stage { margin-inline:-1.25rem; }
   .faq-answer p { padding-right:.5rem; }
+}
+
+@media (max-width: 359px) {
+  .brand span { max-width:9.5rem; }
+  .hero h1 { font-size:2.65rem; }
+  .display { font-size:2.45rem; }
+  .service-item > button { grid-template-columns:2rem 1fr 1.75rem; gap:.65rem; }
+  .project-card-float { width:8.5rem; }
+  .world-stage { padding-inline:1rem; }
+  .inquiry-form { padding:1.1rem; }
+}
+
+@media (max-height: 560px) and (max-width: 900px) {
+  .site-nav { display:grid; grid-template-columns:1fr 1fr; align-content:start; padding-top:5.25rem; }
+  .site-nav .nav-cta { grid-column:1/-1; justify-self:start; }
 }
