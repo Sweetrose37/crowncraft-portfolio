@@ -1,0 +1,38 @@
+@keyframes crownDraw {
+  from { opacity: 0; scale: 1 0; }
+  to { opacity: 1; scale: 1 1; }
+}
+@keyframes lineDraw {
+  from { opacity: 0; transform: scaleX(0); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+@keyframes introUp {
+  from { opacity: 0; transform: translateY(1rem); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes floatA {
+  0%,100% { transform: rotate(-5deg) translate3d(0,0,20px); }
+  50% { transform: rotate(-3deg) translate3d(0,-10px,40px); }
+}
+@keyframes floatB {
+  0%,100% { transform: rotate(8deg) translate3d(0,0,90px); }
+  50% { transform: rotate(6deg) translate3d(4px,-12px,100px); }
+}
+@keyframes floatC {
+  0%,100% { transform: rotate(-10deg) translate3d(0,0,55px); }
+  50% { transform: rotate(-7deg) translate3d(-4px,-8px,70px); }
+}
+.showpiece--web { animation: floatA 7s ease-in-out infinite; }
+.showpiece--book { animation: floatB 6s 1s ease-in-out infinite; }
+.showpiece--invite { animation: floatC 8s .5s ease-in-out infinite; }
+
+.js .reveal { opacity:0; transform:translateY(2rem); transition:opacity .9s var(--ease),transform .9s var(--ease); }
+.js .reveal.is-visible { opacity:1; transform:none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important; }
+  .js .reveal { opacity:1; transform:none; }
+  .preloader { display:none; }
+}

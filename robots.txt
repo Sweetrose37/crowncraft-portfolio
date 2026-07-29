@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Replace yourdomain.com with the final production domain before launch.
+Sitemap: https://yourdomain.com/sitemap.xml
